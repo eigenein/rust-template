@@ -31,6 +31,9 @@ jobs:
         run: cargo test --workspace --all-features
 
       - name: 💬 Clippy
-        if: github.event_name == 'pull_request'
+        uses: giraffate/clippy-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          clippy_flags: -- -Dwarnings
+          reporter: github-pr-check
         continue-on-error: true
-        run: cargo clippy --workspace --all-features --tests
