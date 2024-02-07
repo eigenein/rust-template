@@ -1,0 +1,34 @@
+[package]
+authors = ["Pavel Perestoronin <eigenein@gmail.com>"]
+categories = [] # TODO
+description = "My package description" # TODO
+edition = "2021"
+keywords = [] # TODO
+license-file = "LICENSE"
+name = "my-package-name" # TODO
+publish = false
+readme = "README.md"
+repository = "https://github.com/eigenein/rust-template" # TODO
+version = "0.0.1"
+
+[profile.dev]
+split-debuginfo = "unpacked"
+
+[profile.release]
+codegen-units = 1
+debug = true
+lto = "fat"
+
+[lints.clippy]
+
+# Categories:
+all = "warn"
+nursery = "warn"
+pedantic = "warn"
+
+# Individual flags:
+future_not_send = "allow"
+missing_errors_doc = "allow"
+module_name_repetitions = "allow"
+
+[dependencies]
