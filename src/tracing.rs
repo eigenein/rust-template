@@ -35,6 +35,5 @@ pub fn init(sentry_dsn: Option<&str>) -> Result<(ClientInitGuard, WorkerGuard)> 
         .with(subscriber_layer)
         .try_init()?;
 
-    info!(is_sentry_enabled = sentry_guard.is_enabled(), "tracing configured");
     Ok((sentry_guard, stderr_guard))
 }
