@@ -28,7 +28,6 @@ jobs:
         uses: Swatinem/rust-cache@v2
         with:
           cache-on-failure: true
-        if: false
 
       - name: ⚡️ Shared Compilation Cache
         uses: mozilla-actions/sccache-action@v0.0.4
@@ -53,6 +52,3 @@ jobs:
           clippy_flags: -- -Dwarnings
           reporter: github-check
         continue-on-error: true
-
-      - name: 🤨 Shared cache statistics
-        run: sccache --show-stats
