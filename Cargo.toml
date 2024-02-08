@@ -32,10 +32,13 @@ missing_errors_doc = "allow"
 module_name_repetitions = "allow"
 
 [dependencies]
-anyhow = "1.0.79"
+anyhow = { version = "1.0.79", features = ["backtrace"] }
 clap = { version = "4.4.16", features = ["cargo", "derive", "env"] }
 dotenvy = "0.15.7"
+# futures = { version = "0.3.30", default-features = false, features = ["std"] }
+# reqwest = { version = "0.11.22", default-features = false, features = ["gzip", "json", "rustls-tls"] }
 sentry = { version = "0.32.1", default-features = false, features = ["anyhow", "backtrace", "contexts", "panic", "reqwest", "rustls", "tracing"] }
+# tokio = { version = "1.35.1", features = ["macros", "rt-multi-thread"] }
 tracing = "0.1.40"
 tracing-appender = "0.2.3"
 tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
