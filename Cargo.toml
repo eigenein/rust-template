@@ -32,3 +32,10 @@ missing_errors_doc = "allow"
 module_name_repetitions = "allow"
 
 [dependencies]
+anyhow = "1.0.79"
+clap = { version = "4.4.16", features = ["cargo", "derive", "env"] }
+dotenvy = "0.15.7"
+sentry = { version = "0.32.1", default-features = false, features = ["anyhow", "backtrace", "contexts", "panic", "reqwest", "rustls", "tracing"] }
+tracing = "0.1.40"
+tracing-appender = "0.2.3"
+tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
