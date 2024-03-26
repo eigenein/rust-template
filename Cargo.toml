@@ -16,8 +16,8 @@ split-debuginfo = "unpacked"
 
 [profile.release]
 codegen-units = 1
-debug = true
-lto = "fat"
+lto = "thin"
+strip = true
 
 [lints.clippy]
 
