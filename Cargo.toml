@@ -11,13 +11,9 @@ readme = "README.md"
 repository = "https://github.com/eigenein/rust-template" # TODO
 version = "0.0.1"
 
-[profile.dev]
-split-debuginfo = "unpacked"
-
 [profile.release]
 codegen-units = 1
 lto = "thin"
-strip = true
 
 [lints.clippy]
 
