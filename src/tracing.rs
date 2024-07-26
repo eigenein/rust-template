@@ -35,5 +35,8 @@ pub fn init(sentry_dsn: Option<&str>) -> Result<(ClientInitGuard, WorkerGuard)> 
         .with(subscriber_layer)
         .try_init()?;
 
+    if !sentry_guard.is_enabled() {
+        warn!("⚠️ Sentry is disabled");
+    }
     Ok((sentry_guard, stderr_guard))
 }
