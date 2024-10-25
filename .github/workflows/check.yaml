@@ -18,11 +18,14 @@ env:
 jobs:
   check:
     name: 🧪 Check
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       - name: 📥 Checkout
         uses: actions/checkout@v4
+
+      - name: 🦀 Set up Rust
+        uses: dtolnay/rust-toolchain@stable
 
       - name: ⚡️ Rust Cache
         uses: Swatinem/rust-cache@v2
