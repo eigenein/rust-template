@@ -28,7 +28,7 @@ jobs:
         with:
           cache-on-failure: true
 
-      - name: ⚡️ Set up shared Compilation Cache
+      - name: ⚡️ Set up Shared Compilation Cache
         uses: mozilla-actions/sccache-action@v0.0.6
 
       - name: 🧪 Install coverage tools
