@@ -37,8 +37,3 @@ jobs:
 
       - name: 🦀 Set up Rust
         uses: dtolnay/rust-toolchain@stable
-
-      - name: 📦 Publish the crate
-        run: cargo publish
-        env:
-          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}

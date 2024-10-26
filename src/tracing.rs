@@ -1,10 +1,10 @@
 use std::{borrow::Cow, io::stderr};
 
 use clap::{crate_name, crate_version};
-use sentry::{integrations::tracing::EventFilter, ClientInitGuard, ClientOptions, SessionMode};
+use sentry::{ClientInitGuard, ClientOptions, SessionMode, integrations::tracing::EventFilter};
 use tracing::Level;
 use tracing_appender::non_blocking::WorkerGuard;
-use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt, EnvFilter, Layer};
+use tracing_subscriber::{EnvFilter, Layer, layer::SubscriberExt, util::SubscriberInitExt};
 
 use crate::prelude::*;
 
@@ -27,7 +27,6 @@ pub fn init(sentry_dsn: Option<&str>) -> Result<(ClientInitGuard, WorkerGuard)> 
     let (stderr, stderr_guard) = tracing_appender::non_blocking(stderr());
     let subscriber_layer = tracing_subscriber::fmt::layer()
         .with_writer(stderr)
-        .without_time()
         .with_filter(format_filter);
 
     tracing_subscriber::Registry::default()
