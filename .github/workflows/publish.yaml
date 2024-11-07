@@ -37,3 +37,11 @@ jobs:
 
       - name: 🦀 Set up Rust
         uses: dtolnay/rust-toolchain@stable
+
+      - name: ⚡️ Rust Cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: true
+
+      - name: ⚡️ Set up Shared Compilation Cache
+        uses: mozilla-actions/sccache-action@v0.0.6
