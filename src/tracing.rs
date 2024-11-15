@@ -2,7 +2,7 @@ use std::{borrow::Cow, io::stderr};
 
 use clap::{crate_name, crate_version};
 use sentry::{ClientInitGuard, ClientOptions, SessionMode, integrations::tracing::EventFilter};
-use tracing::Level;
+use tracing::{Level, Metadata};
 use tracing_appender::non_blocking::WorkerGuard;
 use tracing_subscriber::{EnvFilter, Layer, layer::SubscriberExt, util::SubscriberInitExt};
 
@@ -10,7 +10,7 @@ use crate::prelude::*;
 
 pub fn init(sentry_dsn: Option<&str>) -> Result<(ClientInitGuard, WorkerGuard)> {
     let sentry_options = ClientOptions {
-        attach_stacktrace: true,
+        attach_stacktrace: false,
         in_app_include: vec![crate_name!()],
         release: Some(Cow::Borrowed(crate_version!())),
         send_default_pii: true,
@@ -19,7 +19,7 @@ pub fn init(sentry_dsn: Option<&str>) -> Result<(ClientInitGuard, WorkerGuard)> 
     };
     let sentry_guard = sentry::init((sentry_dsn, sentry_options));
     let sentry_layer = sentry::integrations::tracing::layer()
-        .event_filter(|_metadata| EventFilter::Breadcrumb)
+        .event_filter(event_filter)
         .span_filter(|metadata| metadata.level() >= &Level::DEBUG);
 
     let format_filter =
@@ -38,4 +38,13 @@ pub fn init(sentry_dsn: Option<&str>) -> Result<(ClientInitGuard, WorkerGuard)> 
         warn!("Sentry is disabled");
     }
     Ok((sentry_guard, stderr_guard))
+}
+
+#[must_use]
+fn event_filter(metadata: &Metadata) -> EventFilter {
+    match *metadata.level() {
+        Level::ERROR => EventFilter::Exception,
+        Level::WARN => EventFilter::Event,
+        _ => EventFilter::Breadcrumb,
+    }
 }
